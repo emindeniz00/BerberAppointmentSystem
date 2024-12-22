@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BerberAppointmentSystem.Models.User>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>Personel Ekleme Sayfası</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateCustomerToPersonel" method="post">
+                        <div class="form-group mb-3">
+                            <label for="userId" class="form-label fw-bold">Kullanıcı Seç:</label>
+                            <select name="userId" class="form-select" id="userId">
+                                <option value="" disabled selected>Kullanıcı seçin...</option>
+                                @foreach (var user in Model)
+                                {
+                                    <option value="@user.Id">@user.Ad @user.Soyad (@user.Email)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Personel Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
