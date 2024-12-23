@@ -1,0 +1,28 @@
+﻿@model BerberAppointmentSystem.Models.Service
+
+@{
+    ViewData["Title"] = "Hizmet Ekle";
+}
+
+<h2>Hizmet Ekle</h2>
+
+<form asp-action="AddService" method="post">
+    <div class="form-group">
+        <label for="ServisAdı">Hizmet Adı</label>
+        <input type="text" class="form-control" id="ServisAdı" name="ServisAdı" required />
+    </div>
+    <div class="form-group">
+        <label for="Fiyat">Fiyat</label>
+        <input type="number" class="form-control" id="Fiyat" name="Fiyat" required />
+    </div>
+    <div class="form-group">
+        <label for="Sure">Süre</label>
+        <input type="time" class="form-control" id="Sure" name="Sure" required />
+    </div>
+
+    <input type="hidden" name="UzmanlikId" value="@Model.UzmanlikId" />
+
+    <button type="submit" class="btn btn-primary mt-2">Ekle</button>
+</form>
+
+<a href="@Url.Action("Index", "Uzmanlik")" class="btn btn-secondary mt-2">Geri</a>
