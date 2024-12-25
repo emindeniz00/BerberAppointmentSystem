@@ -1,0 +1,38 @@
+﻿@model BerberAppointmentSystem.Models.Personel
+
+@{
+    ViewData["Title"] = "Uzmanlık Güncelleme";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>@Model.User.Ad @Model.User.Soyad - Uzmanlık Güncelleme</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="EditExpertise" method="post">
+                <input type="hidden" name="personelId" value="@Model.PersonelId" />
+
+                <div class="form-group">
+                    <label for="currentExpertise">Mevcut Uzmanlık</label>
+                    <input type="text" class="form-control" id="currentExpertise" value="@Model.Uzmanlik?.UzmanlikAd " Belirtilmemiş"" disabled />
+                </div>
+
+                <div class="form-group">
+                    <label for="newExpertise">Yeni Uzmanlık</label>
+                    <select class="form-control" id="newExpertise" name="newUzmanlikId" required>
+                        @foreach (var expertise in ViewBag.ExpertiseList)
+                        {
+                            <option value="@expertise.Id" selected="@((expertise.Id == Model.UzmanlikId) ? "selected" : "")">
+                                @expertise.UzmanlikAd
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">Güncelle</button>
+                <a href="@Url.Action("ListAllPersonnel", "PersonelManagement")" class="btn btn-secondary">Geri</a>
+            </form>
+        </div>
+    </div>
+</div>

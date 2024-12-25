@@ -1,0 +1,38 @@
+﻿@model List<BerberAppointmentSystem.ViewModels.JobViewModel>
+
+<h1>Personel Günlük Detay</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Randevu ID</th>
+            <th>Müşteri</th>
+            <th>Başlangıç</th>
+            <th>Bitiş</th>
+            <th>Servis Adı</th>
+            <th>Fiyat (₺)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var detail in Model)
+            {
+                <tr>
+                    <td>@detail.AppointmentId</td>
+                    <td>@detail.User.Ad @detail.User.Soyad</td>
+                    <td>@detail.StartTime</td>
+                    <td>@detail.EndTime</td>
+                    <td>@detail.ServiceName</td>
+                    <td>@detail.Price</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">Bugün için detay bulunamadı.</td>
+            </tr>
+        }
+    </tbody>
+</table>

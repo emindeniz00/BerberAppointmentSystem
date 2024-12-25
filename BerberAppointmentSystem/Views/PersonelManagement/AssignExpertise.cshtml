@@ -1,0 +1,51 @@
+﻿@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            <h4>Personel Uzmanlık Atama</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Kullanıcı Adı</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Ad</td>
+                            <td>@user.Soyad</td>
+                            <td>
+                                <!-- Uzmanlık atama işlemi -->
+                                <form asp-action="AssignExpertise" method="post" class="d-flex align-items-center">
+                                    <input type="hidden" name="userId" value="@user.Id" />
+                                    <div class="form-group mr-2">
+                                        <select name="expertiseId" class="form-control">
+                                            @foreach (var expertise in ViewBag.ExpertiseList)
+                                            {
+                                                <option value="@expertise.Id">@expertise.UzmanlikAd</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Atama Yap</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
