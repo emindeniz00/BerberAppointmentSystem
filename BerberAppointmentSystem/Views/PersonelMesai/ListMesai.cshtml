@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BerberAppointmentSystem.Models.PersonelMesai>
+
+@if (TempData["Mesaj"] != null)
+{
+    <div class="alert alert-success" id="successMessage">
+        @TempData["Mesaj"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+            <th scope="col">Gün</th>
+            <th scope="col">Çalışma Aralığı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.User.Ad</td>
+                <td>@user.User.Soyad</td>
+                <td>@user.DayOfWeek</td>
+                <td>@user.StartTime - @user.EndTime</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-left">
+    <a asp-controller="PersonelMesai" asp-action="Index" class="btn btn-success">Yeni Mesai Ekle</a>
+</div>
+
+@section Scripts {
+    @if (TempData["Mesaj"] != null)
+    {
+        <script type="text/javascript">
+            setTimeout(function () {
+                document.getElementById("successMessage").style.display = 'none';
+            }, 2000); // 2000 ms = 2 saniye
+        </script>
+    }
+}

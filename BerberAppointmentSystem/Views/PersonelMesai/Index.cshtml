@@ -1,0 +1,24 @@
+﻿@model IEnumerable<dynamic>
+
+<h2>Personel Listesi</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ad Soyad</th>
+            <th>Mesai İşlemleri</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.PersonelId</td>
+                <td>@personel.AdSoyad</td>
+                <td>
+                    <a href="@Url.Action("Create", "PersonelMesai", new { userId = personel.UserId })" class="btn btn-primary">Mesai Ekle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
