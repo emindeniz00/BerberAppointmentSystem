@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BerberAppointmentSystem.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Gelen Talepler";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center text-primary">Onaylanmış Randevular</h2>
+
+    <!-- Genel Hata Mesajları -->
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Hizmet</th>
+                    <th>Müşteri</th>
+                    <th>Personel</th>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Bitiş Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var randevu in Model)
+                {
+                    <tr>
+                        <td>@randevu.Service.ServisAdı</td>
+                        <td>@randevu.User.Ad @randevu.User.Soyad</td>
+                        <td>@randevu.Personel.User.Ad @randevu.Personel.User.Soyad</td>
+                        <td>@randevu.StartTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                        <td>@randevu.EndTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

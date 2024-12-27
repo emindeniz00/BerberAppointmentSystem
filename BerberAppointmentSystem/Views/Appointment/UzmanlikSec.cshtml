@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BerberAppointmentSystem.Models.Uzmanlik>
+
+<h2>Uzmanlık Seç</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="form-group">
+    <label for="uzmanlikSelect">Uzmanlık Seçin:</label>
+    <select id="uzmanlikSelect" class="form-control">
+        <option value="">Bir uzmanlık seçin</option>
+        @foreach (var uzmanlik in Model)
+        {
+            <option value="@uzmanlik.Id">@uzmanlik.UzmanlikAd</option>
+        }
+    </select>
+</div>
+
+<div id="hizmetlerContainer" class="mt-4">
+    <!-- Dinamik olarak hizmetler buraya yüklenecek -->
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('uzmanlikSelect').addEventListener('change', function () {
+            var uzmanlikId = this.value;
+            var hizmetlerContainer = document.getElementById('hizmetlerContainer');
+
+            if (uzmanlikId) {
+                fetch(/Appointment/GetHizmetler?uzmanlikId=${uzmanlikId})
+                    .then(response => response.text())
+                    .then(html => {
+                        hizmetlerContainer.innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error('Hizmetler yüklenirken bir hata oluştu:', error);
+                        hizmetlerContainer.innerHTML = '<div class="text-danger">Hizmetler yüklenemedi.</div>';
+                    });
+            } else {
+                hizmetlerContainer.innerHTML = '';
+            }
+        });
+    </script>
+}

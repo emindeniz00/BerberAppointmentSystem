@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BerberAppointmentSystem.Models.Service>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hizmet Adı</th>
+            <th>Fiyat</th>
+
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.ServisAdı</td>
+                <td>@service.Fiyat</td>
+
+                <td>
+                    <a asp-action="RandevuOlustur" asp-route-serviceId="@service.Id" class="btn btn-primary">Randevu Oluştur</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
