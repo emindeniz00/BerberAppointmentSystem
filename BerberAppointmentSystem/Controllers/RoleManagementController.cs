@@ -70,7 +70,7 @@ namespace BerberAppointmentSystem.Controllers
                 await _context.SaveChangesAsync();
 
 
-                return Ok($"User {user.UserName} is now a Personel.");
+                return RedirectToAction("ListAllPersonnel", "PersonelManagement");
             }
 
             return BadRequest("User is not in the Customer role.");

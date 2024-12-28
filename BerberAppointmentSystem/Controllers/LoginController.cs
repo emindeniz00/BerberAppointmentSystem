@@ -3,6 +3,7 @@ using BerberAppointmentSystem.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BerberAppointmentSystem.Controllers
 {
@@ -42,7 +43,7 @@ namespace BerberAppointmentSystem.Controllers
                     return RedirectToAction("Profile", "Login");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Mail veya şifre hatalı!");
             }
 
             return View(model);
@@ -50,10 +51,26 @@ namespace BerberAppointmentSystem.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = await _userManager.FindByIdAsync(userId);
+            ViewBag.Roles = await _userManager.GetRolesAsync(user);
+
+
+            if (user != null)
+            {
+                var email = user.Email;
+                var fullName = $"{user.Ad} {user.Soyad}";
+                var roles = await _userManager.GetRolesAsync(user);
+            }
+
+            return View(user);
         }
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> Logout()

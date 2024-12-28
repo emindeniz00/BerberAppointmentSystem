@@ -1,11 +1,13 @@
 ﻿using BerberAppointmentSystem.Context;
 using BerberAppointmentSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BerberAppointmentSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PersonelMesaiController : Controller
     {
         private readonly ApplicationDbContext _context;

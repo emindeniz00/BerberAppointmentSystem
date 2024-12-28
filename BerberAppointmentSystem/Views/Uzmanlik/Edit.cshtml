@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BerberAppointmentSystem.Models.Service>
+
+@{
+    ViewData["Title"] = "Servisler";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">@ViewData["Title"]</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Servis Adı</th>
+                    <th>Uzmanlık</th>
+                    <th>Fiyat</th>
+                    <th>Süre</th>
+                    <th>Aksiyon</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model)
+                {
+                    <tr>
+                        <td>@service.ServisAdı</td>
+                        <td>@service.Uzmanlik.UzmanlikAd</td>
+                        <td>@(service.Fiyat.HasValue ? service.Fiyat.Value.ToString("C2") : "Belirtilmemiş")</td>
+                        <td>@service.Sure</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Uzmanlik", new { id = service.Id })" class="btn btn-warning btn-sm">Düzenle</a>
+                            <a href="@Url.Action("Delete", "Uzmanlik", new { id = service.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Bu servisi silmek istediğinizden emin misiniz?')">Sil</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

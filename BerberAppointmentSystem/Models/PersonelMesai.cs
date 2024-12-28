@@ -7,8 +7,8 @@ namespace BerberAppointmentSystem.Models
         [Key]
         public int MesaiId { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int ?UserId { get; set; }
+        public User ?User { get; set; }
 
         public DayOfWeek DayOfWeek { get; set; }
 

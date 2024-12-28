@@ -1,17 +1,64 @@
-﻿@model BerberAppointmentSystem.ViewModels.LoginViewModel
+﻿@{
+    Layout = "~/Views/Shared/_AnaLayout.cshtml";
+}
+@model BerberAppointmentSystem.ViewModels.LoginViewModel
 
-<h2>Login</h2>
+<style>
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* Sadece login alanını merkeze almak için kullanılır */
+    }
 
-<form asp-action="Giris" method="post">
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #fdfaf6; /* Kahve tonu arka plan */
+        color: #4b3e35;
+        margin: 0;
+    }
+
+    .login-box {
+        background-color: #fff8f0;
+        border: 1px solid #d4a373;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 100%;
+        padding: 2rem;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+</style>
+
+
+
+<div class="login-container">
+    <div class="login-box">
+        <h2 class="text-center mb-4">Giriş Yap</h2>
+        @if (!ViewData.ModelState.IsValid)
+
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary(false, "Giriş başarısız:")
+            </div>
+        }
+        <form asp-action="Giris" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="E-posta adresinizi giriniz" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi giriniz" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-secondary w-100">Giriş Yap</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>Hesabın Yok Mu?</p>
+            <a asp-controller="Register" asp-action="KayitOl" class="btn btn-warning">Kayıt Ol</a>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</div>
+</div>

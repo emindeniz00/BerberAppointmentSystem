@@ -56,7 +56,7 @@ namespace BerberAppointmentSystem.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Anasayfa");
                 }
 
                 foreach (var error in result.Errors)

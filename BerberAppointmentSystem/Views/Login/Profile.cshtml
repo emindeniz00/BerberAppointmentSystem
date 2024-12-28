@@ -1,7 +1,39 @@
-﻿<h2>Welcome to your profile!</h2>
+﻿@model BerberAppointmentSystem.Models.User
+@using Microsoft.AspNetCore.Identity
+@{
+    Layout = "~/Views/Shared/_AnaLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Profilim";
+}
 
-<p>Hello, @User.Identity.Name!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header" style="background-color: #D2B48C; color: #fff;">
+                    <h3 class="text-center mb-0">Profilim</h3>
+                </div>
+                <div class="card-body">
 
-<form asp-action="Logout" method="post">
-    <button type="submit" class="btn btn-danger">Logout</button>
-</form>
+                    <h4 class="text-center mb-3">@Model.Ad @Model.Soyad</h4>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-4 text-end font-weight-bold">Email:</div>
+                        <div class="col-8">@Model.Email</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4 text-end font-weight-bold">Roller:</div>
+                        <div class="col-8">
+                            @foreach (var role in ViewBag.Roles as IEnumerable<string>)
+                            {
+                                <span class="badge bg-secondary">@role</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
